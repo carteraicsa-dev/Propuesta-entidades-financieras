@@ -2,16 +2,17 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Propuesta de Alianza Estratégica para Financiación Educativa — ICSA</title>
-<script src="./vendor/react.js"></script>
-<script src="./vendor/react-dom.js"></script>
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propuesta de Alianza Estrat&eacute;gica para Financiaci&oacute;n Educativa &mdash; ICSA</title>
+<meta name="description" content="Propuesta de alianza estrat&eacute;gica para financiaci&oacute;n educativa entre el Instituto Centro de Sistemas Avanzados (ICSA) y una entidad financiera.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap">
 <style>
+html{scroll-behavior:smooth}
+
 body{margin:0;background:#F4F6F9;font-family:'Public Sans','Helvetica Neue',sans-serif;color:#12233F;-webkit-font-smoothing:antialiased}
 a{color:#1C5FA8}
 a:hover{color:#102A55}
@@ -27,17 +28,24 @@ table{border-collapse:collapse}
   .icsa-h2{font-size:29px !important}
   .icsa-hero-kpis{grid-template-columns:minmax(0,1fr) !important}
   .icsa-scroll{overflow-x:auto}
+  .icsa-bars{grid-template-columns:minmax(0,1fr) auto !important;row-gap:9px !important;column-gap:12px !important}
+  .icsa-bars > span:first-child{grid-row:1;grid-column:1}
+  .icsa-bars > span:last-child{grid-row:1;grid-column:2}
+  .icsa-bars > div{grid-row:2;grid-column:1 / -1}
 }
-</style>
-</helmet>
 
+</style>
+</head>
+<body>
+<div id="app"></div>
+<template id="dc-template">
 <div style="width: 100%; min-width: 0; background: #F4F6F9;">
 
   <!-- ============ NAV ============ -->
   <header style="position: sticky; top: 0; z-index: 50; background: rgba(246,245,241,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #DBE0E8;">
     <div class="icsa-pad" style="max-width: 1180px; margin: 0 auto; padding: 14px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
       <a href="#inicio" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-        <img src="./assets/8d7765270bdee94cd15c5ab4c5895ef3.png" alt="Corporación Educativa ICSA" style="height: 38px; width: auto; display: block;">
+        <img src="logo.png" alt="Corporación Educativa ICSA" style="height: 38px; width: auto; display: block;">
         <div style="display: flex; flex-direction: column; padding-left: 14px; border-left: 1px solid #C7CCD6;">
           <span style="font-size: 13px; font-weight: 700; letter-spacing: 1.4px; color: #12233F;">INSTITUTO CENTRO DE SISTEMAS AVANZADOS</span>
           <span style="font-size: 11px; letter-spacing: 0.9px; color: #6A7480;">PROPUESTA DE ALIANZA · 2026</span>
@@ -59,7 +67,7 @@ table{border-collapse:collapse}
 
   <!-- ============ HERO ============ -->
   <section id="inicio" class="icsa-pad" style="max-width: 1180px; margin: 0 auto; padding: 96px 40px 80px;">
-    <img src="./assets/8d7765270bdee94cd15c5ab4c5895ef3.png" alt="Corporación Educativa ICSA" style="height: 62px; width: auto; display: block; margin-bottom: 30px;">
+    <img src="logo.png" alt="Corporación Educativa ICSA" style="height: 62px; width: auto; display: block; margin-bottom: 30px;">
     <div style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid #C2C9D5; border-radius: 3px; padding: 7px 14px; margin-bottom: 34px;">
       <span style="width: 6px; height: 6px; border-radius: 50%; background: #1C5FA8;"></span>
       <span style="font-size: 11px; letter-spacing: 2px; color: #4A5560; font-weight: 600;">DOCUMENTO DE TRABAJO · CONFIDENCIAL</span>
@@ -275,7 +283,7 @@ table{border-collapse:collapse}
 
     <div style="display: flex; flex-direction: column; gap: 13px;">
       <sc-for list="{{topProgramas}}" as="p" hint-placeholder-count="15">
-        <div style="display: grid; grid-template-columns: 300px minmax(0, 1fr) 76px; gap: 18px; align-items: center;">
+        <div class="icsa-bars" style="display: grid; grid-template-columns: 300px minmax(0, 1fr) 76px; gap: 18px; align-items: center;">
           <span style="font-size: 14px; color: #2A3843; line-height: 1.35;">{{p.nombre}}</span>
           <div style="height: 22px; background: #E6EAF1;">
             <div style="height: 100%; background: {{p.color}}; width: {{p.w}};"></div>
@@ -314,8 +322,7 @@ table{border-collapse:collapse}
             </tr>
           </thead>
           <tbody>
-            <sc-for list="{{costosFiltrados}}" as="c" hint-placeholder-count="17">
-              <tr onClick="{{c.pick}}" style="border-bottom: 1px solid #E6EAF1; cursor: pointer; background: {{c.fondo}};">
+            <tr data-for="costosFiltrados" data-as="c" onClick="{{c.pick}}" style="border-bottom: 1px solid #E6EAF1; cursor: pointer; background: {{c.fondo}};">
                 <td style="padding: 13px 14px 13px 0; color: #78828C; font-size: 12px; letter-spacing: 0.6px;">{{c.area}}</td>
                 <td style="padding: 13px 14px; color: #12233F; font-weight: 500;">{{c.programa}}</td>
                 <td style="padding: 13px 14px; text-align: right; color: #48545F; font-variant-numeric: tabular-nums;">{{c.s1}}</td>
@@ -324,7 +331,6 @@ table{border-collapse:collapse}
                 <td style="padding: 13px 14px; text-align: right; color: #48545F; font-variant-numeric: tabular-nums;">{{c.pr}}</td>
                 <td style="padding: 13px 0 13px 14px; text-align: right; color: #17376B; font-weight: 700; font-variant-numeric: tabular-nums;">{{c.total}}</td>
               </tr>
-            </sc-for>
           </tbody>
           <tfoot>
             <tr style="border-top: 2px solid #12233F;">
@@ -621,7 +627,7 @@ table{border-collapse:collapse}
       <div class="icsa-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;">
         <div>
           <span style="display: inline-flex; background: #FFFFFF; border-radius: 4px; padding: 10px 14px; margin-bottom: 18px;">
-            <img src="./assets/8d7765270bdee94cd15c5ab4c5895ef3.png" alt="Corporación Educativa ICSA" style="height: 34px; width: auto; display: block;">
+            <img src="logo.png" alt="Corporación Educativa ICSA" style="height: 34px; width: auto; display: block;">
           </span>
           <div style="font-size: 13px; font-weight: 700; letter-spacing: 1.4px; color: #E4EAF4; margin-bottom: 10px;">INSTITUTO CENTRO DE SISTEMAS AVANZADOS LTDA.</div>
           <p style="margin: 0; font-size: 13px; line-height: 1.7;">Propuesta de Alianza Estratégica para Financiación Educativa · Período 2026-1<br>Cra. 53 N.° 53-60 · Cra. 42B N.° 76-61 · Barranquilla, Colombia<br>(+57) 300 853 8572 · admisionesyregistro@icsa.edu.co · icsa.edu.co</p>
@@ -634,9 +640,161 @@ table{border-collapse:collapse}
   </footer>
 
 </div>
-</x-dc>
+</template>
+<script>
 
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":9400}}'>
+(function () {
+  function lookup(path, scope) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    var parts = path.split('.');
+    var cur = scope;
+    for (var i = 0; i < parts.length; i++) {
+      if (cur === null || cur === undefined) return undefined;
+      cur = cur[parts[i]];
+    }
+    return cur;
+  }
+
+  var HOLE = /\{\{([^}]+)\}\}/g;
+
+  function interp(text, scope) {
+    return text.replace(HOLE, function (_, p) {
+      var v = lookup(p, scope);
+      return (v === null || v === undefined) ? '' : String(v);
+    });
+  }
+
+  function wholeHole(value) {
+    var m = /^\s*\{\{([^}]+)\}\}\s*$/.exec(value);
+    return m ? m[1] : null;
+  }
+
+  function renderNodes(nodes, scope, out) {
+    for (var i = 0; i < nodes.length; i++) out.push.apply(out, renderNode(nodes[i], scope));
+    return out;
+  }
+
+  function childScope(scope, name, item, index) {
+    var s = Object.create(scope);
+    s[name] = item;
+    s.$index = index;
+    return s;
+  }
+
+  function renderNode(node, scope) {
+    if (node.nodeType === 3) {
+      var t = node.nodeValue;
+      if (HOLE.test(t)) { HOLE.lastIndex = 0; return [document.createTextNode(interp(t, scope))]; }
+      HOLE.lastIndex = 0;
+      return [document.createTextNode(t)];
+    }
+    if (node.nodeType !== 1) return [];
+
+    var tag = node.tagName.toLowerCase();
+
+    if (tag === 'sc-for') {
+      var list = lookup(wholeHole(node.getAttribute('list')) || '', scope) || [];
+      var as = node.getAttribute('as') || 'item';
+      var out = [];
+      for (var i = 0; i < list.length; i++) {
+        renderNodes(node.childNodes, childScope(scope, as, list[i], i), out);
+      }
+      return out;
+    }
+
+    if (tag === 'sc-if') {
+      var cond = lookup(wholeHole(node.getAttribute('value')) || '', scope);
+      return cond ? renderNodes(node.childNodes, scope, []) : [];
+    }
+
+    if (node.hasAttribute('data-for')) {
+      var dl = lookup(node.getAttribute('data-for'), scope) || [];
+      var da = node.getAttribute('data-as') || 'item';
+      var res = [];
+      for (var j = 0; j < dl.length; j++) {
+        var clone = node.cloneNode(true);
+        clone.removeAttribute('data-for');
+        clone.removeAttribute('data-as');
+        res.push.apply(res, renderNode(clone, childScope(scope, da, dl[j], j)));
+      }
+      return res;
+    }
+
+    var el = document.createElement(tag);
+    for (var a = 0; a < node.attributes.length; a++) {
+      var at = node.attributes[a];
+      var name = at.name, val = at.value;
+      if (name.indexOf('hint-') === 0) continue;
+      if (name.indexOf('on') === 0) {
+        var fnPath = wholeHole(val);
+        if (fnPath) {
+          (function (evt, fn) {
+            el.addEventListener(evt, function (e) { if (typeof fn === 'function') fn(e); });
+          })(name.slice(2), lookup(fnPath, scope));
+        }
+        continue;
+      }
+      var whole = wholeHole(val);
+      var resolved = whole !== null ? lookup(whole, scope) : interp(val, scope);
+      if (resolved === null || resolved === undefined) resolved = '';
+      el.setAttribute(name, String(resolved));
+      if (name === 'value' && (tag === 'input' || tag === 'textarea')) el.value = String(resolved);
+    }
+    renderNodes(node.childNodes, scope, []).forEach(function (c) { el.appendChild(c); });
+    return [el];
+  }
+
+  function renderNodesArr(nodes, scope) { return renderNodes(nodes, scope, []); }
+
+  window.DCLogic = function (props) { this.props = props || {}; this.state = {}; };
+  window.DCLogic.prototype.setState = function (patch) {
+    for (var k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) this.state[k] = patch[k];
+    window.__rerender();
+  };
+  window.DCLogic.prototype.forceUpdate = function () { window.__rerender(); };
+
+  window.__mount = function (ComponentClass) {
+    var tpl = document.getElementById('dc-template');
+    var root = document.getElementById('app');
+    var inst = new ComponentClass({});
+    var pending = false;
+
+    function paint() {
+      pending = false;
+      var active = document.activeElement;
+      var focusId = active && active.id ? active.id : null;
+      var caret = null;
+      if (focusId && active.setSelectionRange && active.type !== 'number') {
+        try { caret = [active.selectionStart, active.selectionEnd]; } catch (e) { caret = null; }
+      }
+      var vals = inst.renderVals();
+      var frag = document.createDocumentFragment();
+      renderNodesArr(tpl.content.childNodes, vals).forEach(function (n) { frag.appendChild(n); });
+      root.innerHTML = '';
+      root.appendChild(frag);
+      if (focusId) {
+        var again = document.getElementById(focusId);
+        if (again) {
+          again.focus();
+          if (caret && again.setSelectionRange) { try { again.setSelectionRange(caret[0], caret[1]); } catch (e) {} }
+        }
+      }
+    }
+
+    window.__rerender = function () {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(paint);
+    };
+    paint();
+  };
+})();
+
+</script>
+<script>
+
 class Component extends DCLogic {
   constructor(props) {
     super(props);
@@ -995,6 +1153,9 @@ class Component extends DCLogic {
     };
   }
 }
+
+window.__mount(Component);
+
 </script>
 </body>
 </html>
